@@ -73,7 +73,7 @@ class PDDService
 
         return ['response' => 'Hello. Your PDDBundle works'];
 
-    }//end petStoreHandler()
+    }//end pddHandler()
 
 
 }//end class
