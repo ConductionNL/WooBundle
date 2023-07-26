@@ -1,5 +1,5 @@
 {
-    "name": "common-gateway/pet-store-bundle",
+    "name": "common-gateway/pdd-bundle",
     "description": "An example package for creating symfony flex bundles as plugins",
     "type": "symfony-bundle",
     "keywords": [
@@ -9,7 +9,7 @@
         "conduction",
         "symfony",
         "common-gateway-plugin",
-        "pet store"
+        "pdd"
     ],
     "homepage": "https://commongateway.nl",
     "license": "EUPL-1.2",
@@ -34,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CommonGateway\\PetStoreBundle\\": "src/"
+            "CommonGateway\\PDDBundle\\": "src/"
         }
     }
 }
