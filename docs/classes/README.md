@@ -1,4 +1,4 @@
-# CommonGateway\PetStoreBundle
+# CommonGateway\PDDBundle
 
 * [Service\InstallationService](Service/InstallationService.md) 
-* [Service\PetStoreService](Service/PetStoreService.md) 
+* [Service\PDDService](Service/PDDService.md) 
