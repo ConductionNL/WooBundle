@@ -1,3 +1,32 @@
 {
-    "installationService": "CommonGateway\\PDDBundle\\Service\\InstallationService"
+  "installationService": "CommonGateway\\PDDBundle\\Service\\InstallationService",
+  "endpoints": {
+    "schemas": [
+      {
+        "reference": "https://commongateway.nl/pdd.openWOO.schema.json",
+        "path": "openWOO",
+        "methods": []
+      },
+      {
+        "reference": "https://commongateway.nl/pdd.thema.schema.json",
+        "path": "themas",
+        "methods": []
+      },
+      {
+        "reference": "https://commongateway.nl/pdd.geografischePositie.schema.json",
+        "path": "geografischePosities",
+        "methods": []
+      },
+      {
+        "reference": "https://commongateway.nl/pdd.coords.schema.json",
+        "path": "coords",
+        "methods": []
+      },
+      {
+        "reference": "https://commongateway.nl/pdd.bijlage.schema.json",
+        "path": "bijlagen",
+        "methods": []
+      }
+    ]
+  }
 }
