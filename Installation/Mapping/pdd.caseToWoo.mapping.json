@@ -31,7 +31,7 @@
     "Adres": "{% if instance.requestor.instance.subject.instance.address_residence.instance.street|default and instance.requestor.instance.subject.instance.address_residence.instance.street_number|default %}{{ instance.requestor.instance.subject.instance.address_residence.instance.street~' '~instance.requestor.instance.subject.instance.address_residence.instance.street_number  }}{% endif %}",
     "COORDS": "unknown",
     "Geografische_positie": "unknown",
-    "Bijlagen": "unknown",
+    "Bijlagen": "unknown (could be fetched with a extra request)",
     "Themas": "unknown"
   }
 }
