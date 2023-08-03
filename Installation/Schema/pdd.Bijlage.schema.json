@@ -1,0 +1,30 @@
+{
+  "title": "Bijlage",
+  "$id": "https://commongateway.nl/pdd.bijlage.schema.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+  "version": "0.0.1",
+  "type": "object",
+  "description": "",
+  "required": ["Titel_Bijlage", "URL_Bijlage"],
+  "properties": {
+    "Type_Bijlage": {
+      "type": "string"
+    },
+    "Status_Bijlage": {
+      "type": "string"
+    },
+    "Tijdstip_laatste_wijziging_bijlage": {
+      "type": "datetime",
+      "description": "format: Y-m-d\\TH:i:s"
+    },
+    "Titel_Bijlage": {
+      "type": "string",
+      "required": true
+    },
+    "URL_Bijlage": {
+      "type": "string",
+      "format": "url",
+      "required": true
+    }
+  }
+}
