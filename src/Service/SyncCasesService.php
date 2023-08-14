@@ -13,11 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SyncCasesService
 {
+
     private GatewayResourceService $resourceService;
+
     private CallService $callService;
+
     private SynchronizationService $syncService;
+
     private array $data;
+
     private array $configuration;
+
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -26,12 +32,14 @@ class SyncCasesService
         SynchronizationService $syncService,
         MappingService $mappingService
     ) {
-        $this->entityManager = $entityManager;
+        $this->entityManager   = $entityManager;
         $this->resourceService = $resourceService;
-        $this->callService = $callService;
-        $this->syncService = $syncService;
-        $this->mappingService = $mappingService;
-    }
+        $this->callService     = $callService;
+        $this->syncService     = $syncService;
+        $this->mappingService  = $mappingService;
+
+    }//end __construct()
+
 
     /**
      * Handles the synchronization of xxllnc cases.
@@ -45,11 +53,11 @@ class SyncCasesService
      */
     public function syncCasesHandler(array $data, array $configuration): array
     {
-        $this->data = $data;
+        $this->data          = $data;
         $this->configuration = $configuration;
 
-        $source = $this->resourceService->getSource('', 'common-gateway/pdd-bundle');
-        $schema = $this->resourceService->getSchema('https://commongateway.nl/pdd.openWOO.schema.json', 'common-gateway/pdd-bundle');
+        $source  = $this->resourceService->getSource('', 'common-gateway/pdd-bundle');
+        $schema  = $this->resourceService->getSchema('https://commongateway.nl/pdd.openWOO.schema.json', 'common-gateway/pdd-bundle');
         $mapping = $this->resourceService->getMapping('https://commongateway.nl/mapping/pdd.CaseToWooObject.mapping.json', 'common-gateway/pdd-bundle');
 
         $sourceConfig = $source->getConfiguration();
@@ -72,5 +80,8 @@ class SyncCasesService
         $this->data['response'] = new Response(json_encode($responseItems), 200);
 
         return $this->data;
-    }
-}
+
+    }//end syncCasesHandler()
+
+
+}//end class

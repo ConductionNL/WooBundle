@@ -11,12 +11,16 @@ use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
 
 class SyncPubHandler implements ActionHandlerInterface
 {
+
     private SyncCasesService $service;
+
 
     public function __construct(SyncCasesService $service)
     {
         $this->service = $service;
-    }
+
+    }//end __construct()
+
 
     /**
      *  This function returns the requered configuration as a [json-schema](https://json-schema.org/) array.
@@ -26,14 +30,16 @@ class SyncPubHandler implements ActionHandlerInterface
     public function getConfiguration(): array
     {
         return [
-            '$id'        => 'https://commongateway.nl/pdd.SyncCasesAction.action.json',
-            '$schema'    => 'https://docs.commongateway.nl/schemas/ActionHandler.schema.json',
-            'title'      => 'SyncCasesHandler',
-            'description'=> 'Handles the sync for xxllnc cases.',
-            'required'   => [],
-            'properties' => [],
+            '$id'         => 'https://commongateway.nl/pdd.SyncCasesAction.action.json',
+            '$schema'     => 'https://docs.commongateway.nl/schemas/ActionHandler.schema.json',
+            'title'       => 'SyncCasesHandler',
+            'description' => 'Handles the sync for xxllnc cases.',
+            'required'    => [],
+            'properties'  => [],
         ];
-    }
+
+    }//end getConfiguration()
+
 
     /**
      * This function runs the SyncCases service plugin.
@@ -48,5 +54,8 @@ class SyncPubHandler implements ActionHandlerInterface
     public function run(array $data, array $configuration): array
     {
         return $this->service->syncCasesHandler($data, $configuration);
-    }
-}
+
+    }//end run()
+
+
+}//end class
