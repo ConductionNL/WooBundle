@@ -56,9 +56,9 @@ class SyncCasesService
         $this->data          = $data;
         $this->configuration = $configuration;
 
-        $source  = $this->resourceService->getSource('', 'common-gateway/pdd-bundle');
-        $schema  = $this->resourceService->getSchema('https://commongateway.nl/pdd.openWOO.schema.json', 'common-gateway/pdd-bundle');
-        $mapping = $this->resourceService->getMapping('https://commongateway.nl/mapping/pdd.CaseToWooObject.mapping.json', 'common-gateway/pdd-bundle');
+        $source  = $this->resourceService->getSource('https://commongateway.woo.nl/source/noordwijk.zaaksysteem.source.json', 'common-gateway/pdd-bundle');
+        $schema  = $this->resourceService->getSchema('https://commongateway.nl/mapping/pdd.openWOO.schema.json', 'common-gateway/pdd-bundle');
+        $mapping = $this->resourceService->getMapping('https://commongateway.nl/pdd.xxllncCaseToWoo.schema.json', 'common-gateway/pdd-bundle');
 
         $sourceConfig = $source->getConfiguration();
 
