@@ -1,6 +1,6 @@
 {
   "title": "XxllncCaseToWoo",
-  "$id": "https://commongateway.nl/pdd.xxllncCaseToWoo.schema.json",
+  "$id": "https://commongateway.nl/mapping/pdd.xxllncCaseToWoo.schema.json",
   "$schema": "https://docs.commongateway.nl/schemas/Mapping.schema.json",
   "version": "0.0.1",
   "passTrough": false,
