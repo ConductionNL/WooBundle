@@ -5,6 +5,8 @@ namespace CommonGateway\PDDBundle\Service;
 use App\Service\SynchronizationService;
 use CommonGateway\CoreBundle\Service\CallService;
 use CommonGateway\CoreBundle\Service\GatewayResourceService;
+use CommonGateway\CoreBundle\Service\MappingService;
+use CommonGateway\CoreBundle\Service\HydrationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\CacheException;
 use Psr\Cache\InvalidArgumentException;
@@ -14,7 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Service responsible for synchronizing cases to woo objects.
  * 
- * @author Conduction BV (info@conduction.nl), Barry Brands (barry@conduction.nl)
+ * @author Conduction BV (info@conduction.nl), Barry Brands (barry@conduction.nl).
  * @license EUPL <https://github.com/ConductionNL/contactcatalogus/blob/master/LICENSE.md>
  * 
  * @package CommonGateway\PDDBundle
@@ -37,6 +39,11 @@ class SyncCasesService
      * @var SynchronizationService
      */
     private SynchronizationService $syncService;
+
+    /**
+     * @var MappingService
+     */
+    private MappingService $mappingService;
 
     /**
      * @var EntityManagerInterface
@@ -65,17 +72,20 @@ class SyncCasesService
      * @param CallService $callService
      * @param SynchronizationService $syncService
      * @param EntityManagerInterface $entityManager
+     * @param MappingService $mappingService
      */
     public function __construct(
         GatewayResourceService $resourceService,
         CallService $callService,
         SynchronizationService $syncService,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MappingService $mappingService
     ) {
         $this->resourceService = $resourceService;
         $this->callService     = $callService;
         $this->syncService     = $syncService;
         $this->entityManager   = $entityManager;
+        $this->mappingService  = $mappingService;
     }//end __construct()
 
     /**
@@ -140,14 +150,18 @@ class SyncCasesService
 
         $responseItems = [];
         foreach ($decodedResponse['result'] as $result) {
-            $synchronization = $this->syncService->findSyncBySource($source, $schema, $result['id']);
-            $synchronization->setMapping($mapping);
-            $synchronization = $this->syncService->synchronize($synchronization, $result);
-            $this->entityManager->persist($synchronization);
+            $result = $this->mappingService->mapping($mapping, $result);
+            $hydrationService = new HydrationService($this->syncService, $this->entityManager);
+            $object = $hydrationService->searchAndReplaceSynchronizations(
+                $result,
+                $source,
+                $schema,
+                true,
+                true
+            );
             
-            $responseItems[] = $synchronization->getObject()->toArray();
+            $responseItems[] = $object;
         }
-        $this->entityManager->flush();
 
         $this->data['response'] = new Response(json_encode($responseItems), 200);
 
