@@ -20,6 +20,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * @author  Conduction BV <info@conduction.nl>, Barry Brands <barry@conduction.nl>
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  *
+ * @package CommonGateway\PDDBundle
  * @category Command
  */
 class SyncCasesCommand extends Command
