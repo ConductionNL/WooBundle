@@ -20,7 +20,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * @author  Conduction BV <info@conduction.nl>, Barry Brands <barry@conduction.nl>
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  *
- * @package CommonGateway\PDDBundle
+ * @package  CommonGateway\PDDBundle
  * @category Command
  */
 class SyncCasesCommand extends Command
@@ -53,8 +53,8 @@ class SyncCasesCommand extends Command
      */
     public function __construct(SyncCasesService $syncCaseService, EntityManagerInterface $entityManager)
     {
-        $this->syncCaseService   = $syncCaseService;
-        $this->entityManager = $entityManager;
+        $this->syncCaseService = $syncCaseService;
+        $this->entityManager   = $entityManager;
         parent::__construct();
 
     }//end __construct()
@@ -104,9 +104,8 @@ class SyncCasesCommand extends Command
             && Uuid::isValid($caseId) === true
         ) {
             // if ($this->syncCaseService->getZaak($action->getConfiguration(), $caseId) === true) {
-            //     return Command::FAILURE;
+            // return Command::FAILURE;
             // }
-
             isset($style) === true && $style->info("Succesfully synced and created a WOO object from xxllnc case: $caseId.");
 
             return Command::SUCCESS;

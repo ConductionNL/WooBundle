@@ -11,20 +11,21 @@ use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
 
 /**
  * ActionHandler executing SyncCasesService->syncCasesHandler.
- * 
- * @author Conduction BV (info@conduction.nl), Barry Brands (barry@conduction.nl)
+ *
+ * @author  Conduction BV (info@conduction.nl), Barry Brands (barry@conduction.nl)
  * @license EUPL <https://github.com/ConductionNL/contactcatalogus/blob/master/LICENSE.md>
- * 
- * @package CommonGateway\PDDBundle
+ *
+ * @package  CommonGateway\PDDBundle
  * @category ActionHandler
  */
 class SyncPubHandler implements ActionHandlerInterface
 {
 
     /**
-     * @var SyncCasesService 
+     * @var SyncCasesService
      */
     private SyncCasesService $service;
+
 
     /**
      * SyncPubHandler constructor.

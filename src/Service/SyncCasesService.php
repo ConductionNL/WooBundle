@@ -15,11 +15,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Service responsible for synchronizing cases to woo objects.
- * 
- * @author Conduction BV (info@conduction.nl), Barry Brands (barry@conduction.nl).
+ *
+ * @author  Conduction BV (info@conduction.nl), Barry Brands (barry@conduction.nl).
  * @license EUPL <https://github.com/ConductionNL/contactcatalogus/blob/master/LICENSE.md>
- * 
- * @package CommonGateway\PDDBundle
+ *
+ * @package  CommonGateway\PDDBundle
  * @category Service
  */
 class SyncCasesService
@@ -65,14 +65,15 @@ class SyncCasesService
      */
     private array $configuration;
 
+
     /**
      * SyncCasesService constructor.
      *
      * @param GatewayResourceService $resourceService
-     * @param CallService $callService
+     * @param CallService            $callService
      * @param SynchronizationService $syncService
      * @param EntityManagerInterface $entityManager
-     * @param MappingService $mappingService
+     * @param MappingService         $mappingService
      */
     public function __construct(
         GatewayResourceService $resourceService,
@@ -86,7 +87,9 @@ class SyncCasesService
         $this->syncService     = $syncService;
         $this->entityManager   = $entityManager;
         $this->mappingService  = $mappingService;
+
     }//end __construct()
+
 
     /**
      * Set symfony style in order to output to the console.
@@ -104,6 +107,7 @@ class SyncCasesService
         return $this;
 
     }//end setStyle()
+
 
     /**
      * Handles the synchronization of xxllnc cases.
@@ -123,19 +127,21 @@ class SyncCasesService
         isset($this->style) === true && $this->style->success('SyncCasesService triggered');
 
         $sourceRef = 'https://commongateway.woo.nl/source/noordwijk.zaaksysteem.source.json';
-        $source  = $this->resourceService->getSource($sourceRef, 'common-gateway/pdd-bundle');
+        $source    = $this->resourceService->getSource($sourceRef, 'common-gateway/pdd-bundle');
         if ($source === null) {
             isset($this->style) === true && $this->style->error("$sourceRef not found.");
             return [];
         }
+
         $schemaRef = 'https://commongateway.nl/pdd.openWOO.schema.json';
-        $schema  = $this->resourceService->getSchema($schemaRef, 'common-gateway/pdd-bundle');
+        $schema    = $this->resourceService->getSchema($schemaRef, 'common-gateway/pdd-bundle');
         if ($schema === null) {
             isset($this->style) === true && $this->style->error("$schemaRef not found.");
             return [];
         }
+
         $mappingRef = 'https://commongateway.nl/mapping/pdd.xxllncCaseToWoo.schema.json';
-        $mapping = $this->resourceService->getMapping($mappingRef, 'common-gateway/pdd-bundle');
+        $mapping    = $this->resourceService->getMapping($mappingRef, 'common-gateway/pdd-bundle');
         if ($mapping === null) {
             isset($this->style) === true && $this->style->error("$mappingRef not found.");
             return [];
@@ -145,21 +151,21 @@ class SyncCasesService
 
         isset($this->style) === true && $this->style->info("Fetching cases from {$source->getLocation()}");
 
-        $response = $this->callService->call($source, '', 'GET', $sourceConfig);
+        $response        = $this->callService->call($source, '', 'GET', $sourceConfig);
         $decodedResponse = $this->callService->decodeResponse($source, $response);
 
         $responseItems = [];
         foreach ($decodedResponse['result'] as $result) {
-            $result = $this->mappingService->mapping($mapping, $result);
+            $result           = $this->mappingService->mapping($mapping, $result);
             $hydrationService = new HydrationService($this->syncService, $this->entityManager);
-            $object = $hydrationService->searchAndReplaceSynchronizations(
+            $object           = $hydrationService->searchAndReplaceSynchronizations(
                 $result,
                 $source,
                 $schema,
                 true,
                 true
             );
-            
+
             $responseItems[] = $object;
         }
 
