@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "passTrough": false,
   "mapping": {
+    "_sourceId": "id",
     "UUID": "case.class_uuid",
     "ID": "id",
     "Object_ID": "object_id",
