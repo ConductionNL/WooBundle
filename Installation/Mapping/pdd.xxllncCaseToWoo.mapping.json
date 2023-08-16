@@ -1,0 +1,41 @@
+{
+  "title": "XxllncCaseToWoo",
+  "$id": "https://commongateway.nl/mapping/pdd.xxllncCaseToWoo.schema.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Mapping.schema.json",
+  "version": "0.0.1",
+  "passTrough": false,
+  "mapping": {
+    "_sourceId": "id",
+    "UUID": "case.class_uuid",
+    "ID": "id",
+    "Object_ID": "object_id",
+    "Portal_url": "",
+    "Behandelend_bestuursorgaan": "",
+    "Ontvanger_informatieverzoek": "",
+    "Volgnummer": "",
+    "Titel": "values.case&#46;casetype&#46;name",
+    "Beschrijving": "values.case&#46;subject",
+    "Samenvatting": "values.case&#46;subject",
+    "Verzoeker": "values.case&#46;requestor&#46;name",
+    "Ontvangstdatum": "values.date_created",
+    "Besluitdatum": "",
+    "Behandelstatus": "values.case&#46;status",
+    "Besluit": "",
+    "Termijnoverschrijding": "",
+    "URL_informatieverzoek": "",
+    "URL_inventarisatielijst": "",
+    "URL_besluit": "",
+    "Geografisch_gebied": "",
+    "BAG_ID": "",
+    "BGT_ID": "",
+    "Postcodegebied": "",
+    "Adres": "",
+    "COORDS": "",
+    "Geografische_positie": "",
+    "Bijlagen": "[{% set index=0 %}{% if values['attribute&#46;test_documenten']|default %}{% for document in values['attribute&#46;test_documenten'] %}{% if index != 0 %},{% endif %}{{ map('https://commongateway.nl/mapping/pdd.xxllncTestDocumentToBijlage.schema.json', document)|json_encode }}{% set index=index+1 %}{% endfor %}{% endif %}]",
+    "Themas": ""
+},
+  "cast": {
+      "Bijlagen": "jsonToArray"
+  }
+}
