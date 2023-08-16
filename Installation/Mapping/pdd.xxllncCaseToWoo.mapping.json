@@ -12,13 +12,13 @@
     "Behandelend_bestuursorgaan": "",
     "Ontvanger_informatieverzoek": "",
     "Volgnummer": "",
-    "Titel": "values.case.casetype.name",
-    "Beschrijving": "values.case.subject",
+    "Titel": "values.case&#46;casetype&#46;name",
+    "Beschrijving": "values.case&#46;subject",
     "Samenvatting": "",
-    "Verzoeker": "values.case.requestor.name",
+    "Verzoeker": "values.case&#46;requestor&#46;name",
     "Ontvangstdatum": "values.date_created",
     "Besluitdatum": "",
-    "Behandelstatus": "values.case.status",
+    "Behandelstatus": "values.case&#46;status",
     "Besluit": "",
     "Termijnoverschrijding": "",
     "URL_informatieverzoek": "",
@@ -31,11 +31,10 @@
     "Adres": "",
     "COORDS": "",
     "Geografische_positie": "",
-    "Bijlagen.Type_Bijlage": "values.attribute&#46;test_documenten.mimetype",
-    "Bijlagen.Status_Bijlage": "values.attribute&#46;test_documenten.accepted",
-    "Bijlagen.Tijdstip_laatste_wijziging_bijlage": "values.attribute&#46;test_documenten",
-    "Bijlagen.Titel_Bijlage": "values.attribute&#46;test_documenten.filename",
-    "Bijlagen.URL_Bijlage": "values.attribute&#46;test_documenten",
+    "Bijlagen": "[{% set index=0 %}{% if values['attribute&#46;test_documenten']|default %}{% for document in values['attribute&#46;test_documenten'] %}{% if index != 0 %},{% endif %}{{ map('https://commongateway.nl/mapping/pdd.xxllncTestDocumentToBijlage.schema.json', document)|json_encode }}{% set index=index+1 %}{% endfor %}{% endif %}]",
     "Themas": ""
+},
+  "cast": {
+      "Bijlagen": "jsonToArray"
   }
 }
