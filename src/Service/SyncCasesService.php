@@ -5,36 +5,77 @@ namespace CommonGateway\PDDBundle\Service;
 use App\Service\SynchronizationService;
 use CommonGateway\CoreBundle\Service\CallService;
 use CommonGateway\CoreBundle\Service\GatewayResourceService;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\CacheException;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Service responsible for synchronizing cases to woo objects.
+ * 
+ * @author Conduction BV (info@conduction.nl), Barry Brands (barry@conduction.nl)
+ * @license EUPL <https://github.com/ConductionNL/contactcatalogus/blob/master/LICENSE.md>
+ * 
+ * @package CommonGateway\PDDBundle
+ * @category Service
+ */
 class SyncCasesService
 {
 
+    /**
+     * @var GatewayResourceService
+     */
     private GatewayResourceService $resourceService;
 
+    /**
+     * @var CallService
+     */
     private CallService $callService;
 
+    /**
+     * @var SynchronizationService
+     */
     private SynchronizationService $syncService;
 
-    private SymfonyStyle $style;
+    /**
+     * @var EntityManagerInterface
+     */
+    private EntityManagerInterface $entityManager;
 
+    /**
+     * @var SymfonyStyle|null
+     */
+    private ?SymfonyStyle $style = null;
+
+    /**
+     * @var array
+     */
     private array $data;
 
+    /**
+     * @var array
+     */
     private array $configuration;
 
-
+    /**
+     * SyncCasesService constructor.
+     *
+     * @param GatewayResourceService $resourceService
+     * @param CallService $callService
+     * @param SynchronizationService $syncService
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(
         GatewayResourceService $resourceService,
         CallService $callService,
-        SynchronizationService $syncService
+        SynchronizationService $syncService,
+        EntityManagerInterface $entityManager
     ) {
         $this->resourceService = $resourceService;
         $this->callService     = $callService;
         $this->syncService     = $syncService;
-
+        $this->entityManager   = $entityManager;
     }//end __construct()
 
     /**
@@ -102,13 +143,14 @@ class SyncCasesService
             $synchronization = $this->syncService->findSyncBySource($source, $schema, $result['id']);
             $synchronization->setMapping($mapping);
             $synchronization = $this->syncService->synchronize($synchronization, $result);
-
+            $this->entityManager->persist($synchronization);
+            
             $responseItems[] = $synchronization->getObject()->toArray();
         }
+        $this->entityManager->flush();
 
         $this->data['response'] = new Response(json_encode($responseItems), 200);
 
-        dump($responseItems);
         isset($this->style) === true && $this->style->success("Synchronized cases to woo objects.");
 
         return $this->data;
