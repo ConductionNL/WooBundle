@@ -14,7 +14,7 @@
     "Volgnummer": "",
     "Titel": "values.case&#46;casetype&#46;name",
     "Beschrijving": "values.case&#46;subject",
-    "Samenvatting": "",
+    "Samenvatting": "values.case&#46;subject",
     "Verzoeker": "values.case&#46;requestor&#46;name",
     "Ontvangstdatum": "values.date_created",
     "Besluitdatum": "",
