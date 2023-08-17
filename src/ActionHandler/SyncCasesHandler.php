@@ -18,7 +18,7 @@ use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
  * @package  CommonGateway\PDDBundle
  * @category ActionHandler
  */
-class SyncPubHandler implements ActionHandlerInterface
+class SyncCasesHandler implements ActionHandlerInterface
 {
 
     /**
