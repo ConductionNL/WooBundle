@@ -26,6 +26,16 @@
         "reference": "https://commongateway.nl/pdd.bijlage.schema.json",
         "path": "bijlagen",
         "methods": []
+      },
+      {
+        "reference": "https://commongateway.nl/pdd.partij.schema.json",
+        "path": "partijen",
+        "methods": []
+      },
+      {
+        "reference": "https://commongateway.nl/pdd.openConvenant.schema.json",
+        "path": "openconvenanten",
+        "methods": []
       }
     ]
   }

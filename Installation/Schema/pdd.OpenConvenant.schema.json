@@ -1,0 +1,46 @@
+{
+  "title": "OpenConvenant",
+  "$id": "https://commongateway.nl/pdd.openConvenant.schema.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+  "version": "0.0.1",
+  "type": "object",
+  "description": "",
+  "properties": {
+    "ID": {
+      "type": "string"
+    },
+    "Samenvatting": {
+      "type": "string"
+    },
+    "Onderwerp": {
+      "type": "string"
+    },
+    "Beleidsterrein": {
+      "type": "string"
+    },
+    "Partijen": {
+        "type": "array",
+        "items": {
+          "$ref": "https://commongateway.nl/pdd.partij.schema.json"
+        }
+    },
+    "Duur": {
+      "type": "string"
+    },
+    "Datum_ondertekening": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "Bijlagen": {
+      "type": "array",
+      "items": {
+        "$ref": "https://commongateway.nl/pdd.bijlageConvenant.schema.json"
+      }
+    }
+  }
+}
