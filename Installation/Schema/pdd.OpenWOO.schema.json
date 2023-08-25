@@ -6,6 +6,10 @@
   "type": "object",
   "description": "",
   "properties": {
+    "oidn": {
+      "type": "string",
+      "description": "The public available code for the designated organisation (municipality) this object is meant for."
+    },
     "UUID": {
       "type": "string"
     },
